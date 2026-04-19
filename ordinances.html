@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ordinances — Lawrence Township</title>
+  <meta name="description" content="Township ordinances for Lawrence Township, Tioga County, Pennsylvania.">
+  <link rel="stylesheet" href="style.css">
+  <script src="config.js"></script>
+  <script src="drive.js"></script>
+</head>
+<body>
+
+  <!-- ====== HEADER ====== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="site-logo" style="text-decoration:none;">
+        <span class="logo-name">Lawrence Township</span>
+        <span class="logo-sub">Tioga County, Pennsylvania</span>
+      </a>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <a href="news.html">Announcements</a>
+        <a href="meetings.html">Meetings</a>
+        <a href="ordinances.html" class="active">Ordinances</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ====== PAGE HERO ====== -->
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <h1>Ordinances</h1>
+      <p>Township ordinances and local regulations</p>
+    </div>
+  </div>
+
+  <!-- ====== MAIN CONTENT ====== -->
+  <div class="content-full">
+
+    <div class="section-label">Township Ordinances</div>
+    <div class="card">
+      <p style="font-size:15px; color:#444; margin-bottom:20px; line-height:1.6;">
+        Lawrence Township ordinances are available for download below. For questions about
+        a specific ordinance, contact the township office at
+        <a href="tel:5708272254">(570) 827-2254</a> or
+        <a href="mailto:twp@epix.net">twp@epix.net</a>.
+      </p>
+      <div id="ordinances-list">
+        <p class="drive-loading">Loading ordinances&hellip;</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="site-footer">
+    <div class="footer-inner" id="footer-contact"></div>
+  </footer>
+
+  <script>
+    UI.renderFooter();
+
+    // Render contact phone/email from config in the intro paragraph
+    document.querySelector(".content-full a[href^='tel']").href = `tel:${CONFIG.phoneTel}`;
+    document.querySelector(".content-full a[href^='tel']").textContent = CONFIG.phone;
+    document.querySelector(".content-full a[href^='mailto']").href = `mailto:${CONFIG.email}`;
+    document.querySelector(".content-full a[href^='mailto']").textContent = CONFIG.email;
+
+    (async function () {
+      const el = document.getElementById("ordinances-list");
+      try {
+        const files = await Drive.getFilesRecursively(CONFIG.driveFolders.ordinances);
+
+        if (files.length === 0) {
+          el.innerHTML = `<p class="drive-loading">No ordinances on file at this time. Contact the township office for assistance.</p>`;
+          return;
+        }
+
+        // Sort alphabetically by filename (ordinances don't use date prefixes)
+        const sorted = [...files].sort((a, b) => a.name.localeCompare(b.name));
+
+        el.innerHTML = sorted.map(file => {
+          // Strip file extension for display
+          const displayName = file.name.replace(/\.[^/.]+$/, "")
+            .replace(/--/g, "\x00").replace(/-/g, " ").replace(/\x00/g, "-");
+
+          return `
+            <div class="ordinance-item">
+              <span class="ordinance-name">${displayName}</span>
+              <a href="${file.webViewLink}" target="_blank" rel="noopener" class="pdf-link">View</a>
+            </div>`;
+        }).join("");
+
+      } catch (err) {
+        UI.showError(el, "Ordinances could not be loaded. Please call the township office at " + CONFIG.phone + ".");
+        console.error(err);
+      }
+    })();
+  </script>
+
+</body>
+</html>

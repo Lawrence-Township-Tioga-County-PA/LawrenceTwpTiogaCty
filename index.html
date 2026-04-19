@@ -6,6 +6,8 @@
   <title>Lawrence Township — Tioga County, PA</title>
   <meta name="description" content="Official website of Lawrence Township, Tioga County, Pennsylvania.">
   <link rel="stylesheet" href="style.css">
+  <script src="config.js"></script>
+  <script src="drive.js"></script>
 </head>
 <body>
 
@@ -18,8 +20,9 @@
       </a>
       <nav class="site-nav">
         <a href="index.html" class="active">Home</a>
-        <a href="news.html">News</a>
+        <a href="news.html">Announcements</a>
         <a href="meetings.html">Meetings</a>
+        <a href="ordinances.html">Ordinances</a>
         <a href="contact.html">Contact</a>
       </nav>
     </div>
@@ -41,72 +44,13 @@
   <!-- ====== MAIN CONTENT ====== -->
   <div class="content-with-sidebar">
 
-    <!-- LEFT: News & Announcements -->
+    <!-- LEFT: Announcements -->
     <main>
       <div class="section-label">News &amp; Announcements</div>
       <div class="card">
-
-        <!-- ================================================================
-             HOW TO ADD A NEWS ITEM:
-             Copy one of the blocks below (from <div class="news-item"> to
-             its closing </div>), paste it at the TOP of this list, and
-             update the date, title, and body text.
-             ================================================================ -->
-
-        <!-- UPDATE: Replace these with real announcements when you go live -->
-        <div class="news-item">
-          <div class="news-date">April 25, 2026</div>
-          <div class="news-title">Spring Clean Up Day — 8:00am - 2:00pm</div>
-          <div class="news-subtitle">Located at Lawrence Township Building</div>
-          <div class="news-body">
-            <strong>Open to Businesses & Household Residents Only<br></strong>
-            <strong>LIMIT 2 LOADS PER BUSINESS or HOUSEHOLD<br></strong>
-            Small items need to be bagged to improve operation<br><br>
-            <strong>Accepting:</strong>
-            <ul style="column-count: 1; margin-left: 250x; list-style-position: inside;">
-              <li>Batteries</li>
-              <li>Appliances</li>
-              <li>Furniture</li>
-              <li>Tires - <strong>Four tires per household, up to 22.5" NO LARGER</strong></li>
-            </ul><br>
-            <strong>Not Accepting:</strong>
-            <ul style="column-count: 2; margin-left: 250x; list-style-position: inside;">
-              <li>Electronics</li>
-              <li>TV's</li>
-              <li>Paint</li>
-              <li>Asbestos</li>
-              <li>Fuels or containers with Fuels</li>
-              <li>Oils or Liquids</li>
-              <li>Burn Barrels</li>
-              <li>Household Garbage</li>
-              <li>Brush</li>
-              <li>Building Materials</li>
-            </ul>
-          </div>
+        <div id="announcements-list">
+          <p class="drive-loading">Loading announcements&hellip;</p>
         </div>
-
-        <div class="news-item">
-          <div class="news-date">April 7, 2026</div>
-          <div class="news-title">Data Center Ordinance Public Hearing — 6:00pm</div>
-          <div class="news-subtitle">Located at Williamson High School</div>
-          <div class="news-body">
-            Public hearing to discuss proposed data center ordinance and zoning.
-          </div>
-        </div>
-
-        <div class="news-item">
-          <div class="news-date">April 6, 2026</div>
-          <div class="news-title">April Board Meeting — Minutes Pending</div>
-          <div class="news-body">
-            The Board of Supervisors met on April 6, 2026. Minutes will be posted to the
-            <a href="meetings.html">Meetings page</a> once approved at the next regular meeting.
-          </div>
-        </div>
-
-
-
-        <!-- End of news items -->
-
         <a href="news.html" class="view-more">View all announcements &rarr;</a>
       </div>
     </main>
@@ -117,65 +61,36 @@
       <!-- Upcoming Meetings -->
       <div class="section-label">Upcoming Meetings</div>
       <div class="card" style="margin-bottom: 22px;">
-
-        <!-- UPDATE: Remove past dates and add upcoming ones as the year progresses -->
-        <div class="meeting-row">
-          <span class="meeting-date">Mon, May 5, 2026</span>
-          <span class="meeting-tag">Board</span>
-        </div>
-        <div class="meeting-row">
-          <span class="meeting-date">Mon, Jun 1, 2026</span>
-          <span class="meeting-tag">Board</span>
-        </div>
-        <div class="meeting-row">
-          <span class="meeting-date">Mon, Jul 6, 2026</span>
-          <span class="meeting-tag">Board</span>
-        </div>
-        <div class="meeting-row">
-          <span class="meeting-date">Mon, Aug 3, 2026</span>
-          <span class="meeting-tag">Board</span>
-        </div>
-        <div class="meeting-row">
-          <span class="meeting-date">Tue, Sep 8, 2026</span>
-          <span class="meeting-tag">Board</span>
-        </div>
-
-        <a href="meetings.html" class="view-more">Full 2026 schedule &rarr;</a>
+        <div id="upcoming-meetings"></div>
+        <a href="meetings.html" class="view-more">Full schedule &amp; records &rarr;</a>
       </div>
 
       <!-- Contact Quick-Reference -->
-      <div class="section-label" style="color:#9cb89f; border-color: #c4a44a;">Township Office</div>
+      <div class="section-label" style="color:#9cb89f; border-color:#c4a44a;">Township Office</div>
       <div class="card-dark">
         <div class="contact-row">
-          <!-- Address icon -->
           <svg class="contact-icon" viewBox="0 0 16 16"><path d="M8 1a5 5 0 100 10A5 5 0 008 1zm0 9a4 4 0 110-8 4 4 0 010 8zm0-6a2 2 0 100 4 2 2 0 000-4z"/></svg>
-          <span>1038 Buckwheat Hollow Rd<br>Lawrenceville, PA 16929</span>
+          <span id="sidebar-address"></span>
         </div>
         <div class="contact-row">
-          <!-- Phone icon -->
           <svg class="contact-icon" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 00-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 004.168 6.608 17.569 17.569 0 006.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 00-.063-1.015l-2.307-1.794a.678.678 0 00-.58-.122l-2.19.547a1.745 1.745 0 01-1.657-.459L5.482 8.062a1.745 1.745 0 01-.46-1.657l.548-2.19a.678.678 0 00-.122-.58L3.654 1.328z"/></svg>
           <div>
-            <span class="contact-strong">(570) 827-2254</span><br>
-            <span style="font-size:12px;">Fax: (570) 827-0210</span>
+            <a id="sidebar-phone" class="contact-strong"></a><br>
+            <span id="sidebar-fax" style="font-size:12px;"></span>
           </div>
         </div>
         <div class="contact-row">
-          <!-- Email icon -->
           <svg class="contact-icon" viewBox="0 0 16 16"><path d="M2 4a1 1 0 011-1h10a1 1 0 011 1v8a1 1 0 01-1 1H3a1 1 0 01-1-1V4zm1 0v.5l5 3 5-3V4H3zm0 1.5V12h10V5.5L8 8.5 3 5.5z"/></svg>
-          <a href="mailto:twp@epix.net" class="contact-strong">twp@epix.net</a>
+          <a id="sidebar-email" class="contact-strong"></a>
         </div>
 
-        <div style="border-top: 1px solid #2d5016; padding-top: 12px; margin-top: 6px;">
+        <div style="border-top:1px solid #2d5016; padding-top:12px; margin-top:6px;">
           <div style="font-size:11px; color:#9cb89f; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:8px;">Office Hours</div>
-          <div class="hours-grid">
-            <span class="hours-day">Monday</span>    <span class="hours-time">9:00 AM – 5:00 PM</span>
-            <span class="hours-day">Wednesday</span> <span class="hours-time">9:00 AM – 5:00 PM</span>
-            <span class="hours-day">Friday</span>    <span class="hours-time">9:00 AM – 5:00 PM</span>
-          </div>
+          <div class="hours-grid" id="sidebar-hours"></div>
         </div>
 
-        <div style="border-top: 1px solid #2d5016; padding-top: 12px; margin-top: 12px; font-size:14px;">
-          <a href="contact.html" style="color: #c4a44a; font-weight:600; text-decoration:none;">
+        <div style="border-top:1px solid #2d5016; padding-top:12px; margin-top:12px; font-size:14px;">
+          <a href="contact.html" style="color:#c4a44a; font-weight:600; text-decoration:none;">
             All contacts &amp; officials &rarr;
           </a>
         </div>
@@ -186,14 +101,72 @@
 
   <!-- ====== FOOTER ====== -->
   <footer class="site-footer">
-    <div class="footer-inner">
-      <strong>Lawrence Township</strong> &bull;
-      1038 Buckwheat Hollow Rd, Lawrenceville, PA 16929<br>
-      Phone: <a href="tel:5708272254">(570) 827-2254</a> &bull;
-      Fax: (570) 827-0210 &bull;
-      <a href="mailto:twp@epix.net">twp@epix.net</a>
-    </div>
+    <div class="footer-inner" id="footer-contact"></div>
   </footer>
+
+  <script>
+    // ── Contact sidebar from CONFIG ───────────────────────────────────────────
+    document.getElementById("sidebar-address").innerHTML = `${CONFIG.address}<br>${CONFIG.city}`;
+    const ph = document.getElementById("sidebar-phone");
+    ph.href = `tel:${CONFIG.phoneTel}`; ph.textContent = CONFIG.phone;
+    document.getElementById("sidebar-fax").textContent = `Fax: ${CONFIG.fax}`;
+    const em = document.getElementById("sidebar-email");
+    em.href = `mailto:${CONFIG.email}`; em.textContent = CONFIG.email;
+    document.getElementById("sidebar-hours").innerHTML = CONFIG.officeHours
+      .map(h => `<span class="hours-day">${h.day}</span><span class="hours-time">${h.hours}</span>`)
+      .join("");
+    UI.renderFooter();
+
+    // ── Upcoming meetings from schedule ───────────────────────────────────────
+    document.getElementById("upcoming-meetings").innerHTML =
+      Schedule.getUpcoming(CONFIG.upcomingMeetingsCount)
+        .map(d => `
+          <div class="meeting-row">
+            <span class="meeting-date">${Schedule.formatDate(d)}</span>
+            <span class="meeting-tag">Board</span>
+          </div>`)
+        .join("");
+
+    // ── Announcements from Drive ──────────────────────────────────────────────
+    (async function () {
+      const el = document.getElementById("announcements-list");
+      try {
+        const files  = await Drive.getFilesRecursively(CONFIG.driveFolders.announcements);
+        const recent = Drive.sortByDate(files).slice(0, CONFIG.announcementsPreviewCount);
+
+        if (recent.length === 0) {
+          el.innerHTML = `<p class="drive-loading">No announcements at this time.</p>`;
+          return;
+        }
+
+        // Fetch full content for each announcement in parallel
+        const items = await Promise.all(recent.map(async file => {
+          const info = Drive.parseFilename(file.name);
+          if (!info) return null;
+          let contentHtml = "";
+          try {
+            if (file.mimeType === "application/vnd.google-apps.document") {
+              contentHtml = await Drive.getDocHtml(file.id);
+            }
+          } catch (e) {
+            contentHtml = `<a href="${file.webViewLink}" target="_blank" rel="noopener">View announcement &rarr;</a>`;
+          }
+          return { info, contentHtml };
+        }));
+
+        el.innerHTML = items.filter(Boolean).map(({ info, contentHtml }) => `
+          <div class="news-item">
+            <div class="news-date">${info.shortDate}</div>
+            <div class="news-title">${info.title}</div>
+            ${contentHtml ? `<div class="announcement-content">${contentHtml}</div>` : ""}
+          </div>`).join("");
+
+      } catch (err) {
+        UI.showError(el, "Announcements could not be loaded. Please call the office or check back later.");
+        console.error(err);
+      }
+    })();
+  </script>
 
 </body>
 </html>

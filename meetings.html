@@ -6,6 +6,8 @@
   <title>Meetings — Lawrence Township</title>
   <meta name="description" content="Meeting schedule, agendas, and minutes for Lawrence Township, Tioga County, PA.">
   <link rel="stylesheet" href="style.css">
+  <script src="config.js"></script>
+  <script src="drive.js"></script>
 </head>
 <body>
 
@@ -18,8 +20,9 @@
       </a>
       <nav class="site-nav">
         <a href="index.html">Home</a>
-        <a href="news.html">News</a>
+        <a href="news.html">Announcements</a>
         <a href="meetings.html" class="active">Meetings</a>
+        <a href="ordinances.html">Ordinances</a>
         <a href="contact.html">Contact</a>
       </nav>
     </div>
@@ -29,184 +32,156 @@
   <div class="page-hero">
     <div class="page-hero-inner">
       <h1>Meetings</h1>
-      <p>Schedules, agendas, and minutes for the Board of Supervisors and commissions</p>
+      <p>Schedule, agendas, and minutes for the Board of Supervisors</p>
     </div>
   </div>
 
   <!-- ====== MAIN CONTENT ====== -->
   <div class="content-full">
 
-    <!-- Board of Supervisors Schedule -->
+    <!-- ── 2026 Full Schedule ─────────────────────────────────────────────── -->
     <div class="section-label">Board of Supervisors — 2026 Schedule</div>
     <div class="card" style="margin-bottom:28px;">
       <p style="font-size:15px; color:#444; margin-bottom:16px; line-height:1.6;">
         The Board of Supervisors meets the <strong>1st Monday of each month at 6:30 PM</strong>
-        at the Township Building, 1038 Buckwheat Hollow Rd, Lawrenceville, PA 16929.
-        If the meeting date falls on a legal holiday, the meeting will be held the following Tuesday
-        at 6:30 PM. The public is invited and encouraged to attend.
+        at the <span id="meeting-location"></span>.
+        If the meeting date falls on a legal holiday, the meeting will be held the following Tuesday.
+        The public is invited and encouraged to attend.
       </p>
       <table class="meeting-table">
         <thead>
           <tr>
-            <th style="width:200px;">Date</th>
-            <th style="width:80px;">Time</th>
-            <th>Agenda</th>
-            <th>Minutes</th>
+            <th>Date</th>
+            <th style="width:70px;">Time</th>
+            <th style="width:100px;">Agenda</th>
+            <th style="width:100px;">Minutes</th>
           </tr>
         </thead>
-        <tbody>
-
-          <!-- ================================================================
-               HOW TO ADD AGENDAS AND MINUTES:
-               1. Upload the PDF file to your hosting server (e.g., in a
-                  folder called "docs/").
-               2. Replace the <span class="pending"> tag with:
-                  <a href="docs/FILENAME.pdf" class="pdf-link">PDF</a>
-               ================================================================ -->
-
-          <!-- UPDATE: Mark past meetings, add PDF links as docs are available -->
-          <tr>
-            <td class="meeting-date">Monday, January 5, 2026</td>
-            <td>6:30 PM</td>
-            <td><span class="pending">—</span></td>
-            <td><span class="pending">Pending</span></td>
-          </tr>
-          <tr>
-            <td class="meeting-date">Monday, February 2, 2026</td>
-            <td>6:30 PM</td>
-            <td><span class="pending">—</span></td>
-            <td><span class="pending">Pending</span></td>
-          </tr>
-          <tr>
-            <td class="meeting-date">Monday, March 2, 2026</td>
-            <td>6:30 PM</td>
-            <td><span class="pending">—</span></td>
-            <td><span class="pending">Pending</span></td>
-          </tr>
-          <tr>
-            <td class="meeting-date">Monday, April 7, 2026</td>
-            <td>6:30 PM</td>
-            <td><span class="pending">—</span></td>
-            <td><span class="pending">Pending</span></td>
-          </tr>
-          <tr>
-            <td class="meeting-date">Monday, May 5, 2026</td>
-            <td>6:30 PM</td>
-            <td><span class="pending">—</span></td>
-            <td><span class="pending">Not yet held</span></td>
-          </tr>
-          <tr>
-            <td class="meeting-date">Monday, June 1, 2026</td>
-            <td>6:30 PM</td>
-            <td><span class="pending">—</span></td>
-            <td><span class="pending">Not yet held</span></td>
-          </tr>
-          <tr>
-            <td class="meeting-date">Monday, July 6, 2026</td>
-            <td>6:30 PM</td>
-            <td><span class="pending">—</span></td>
-            <td><span class="pending">Not yet held</span></td>
-          </tr>
-          <tr>
-            <td class="meeting-date">Monday, August 3, 2026</td>
-            <td>6:30 PM</td>
-            <td><span class="pending">—</span></td>
-            <td><span class="pending">Not yet held</span></td>
-          </tr>
-          <tr>
-            <td class="meeting-date">Tuesday, September 8, 2026 <em style="font-size:12px;color:#888;">(Holiday shift)</em></td>
-            <td>6:30 PM</td>
-            <td><span class="pending">—</span></td>
-            <td><span class="pending">Not yet held</span></td>
-          </tr>
-          <tr>
-            <td class="meeting-date">Monday, October 5, 2026</td>
-            <td>6:30 PM</td>
-            <td><span class="pending">—</span></td>
-            <td><span class="pending">Not yet held</span></td>
-          </tr>
-          <tr>
-            <td class="meeting-date">Monday, November 2, 2026</td>
-            <td>6:30 PM</td>
-            <td><span class="pending">—</span></td>
-            <td><span class="pending">Not yet held</span></td>
-          </tr>
-          <tr>
-            <td class="meeting-date">Monday, December 7, 2026</td>
-            <td>6:30 PM</td>
-            <td><span class="pending">—</span></td>
-            <td><span class="pending">Not yet held</span></td>
-          </tr>
-
+        <tbody id="schedule-body">
+          <tr><td colspan="4"><p class="drive-loading">Loading schedule&hellip;</p></td></tr>
         </tbody>
       </table>
-
       <p style="font-size:13px; color:#888; margin-top:14px;">
         Agendas are posted prior to each meeting when available. Minutes are posted after formal
-        approval at the following regular meeting. Contact the township office with questions.
+        approval at the following regular meeting.
       </p>
     </div>
 
-    <!-- Special / Additional Meetings -->
+    <!-- ── Special Meetings ───────────────────────────────────────────────── -->
     <div class="section-label">Special &amp; Additional Meetings</div>
     <div class="card">
       <p style="font-size:15px; color:#444; margin-bottom:16px; line-height:1.6;">
-        Additional  and special meetings are held as needed for specific matters. All meetings are
-        held at the Township Building unless otherwise noted.
+        Special and additional meetings are called as needed and posted in advance per
+        Pennsylvania Sunshine Act requirements.
       </p>
-      <table class="meeting-table">
-        <thead>
-          <tr>
-            <th style="width:200px;">Date</th>
-            <th style="width:160px;">Type</th>
-            <th>Purpose</th>
-            <th>Minutes</th>
-          </tr>
-        </thead>
-        <tbody>
-
-          <!-- ================================================================
-               HOW TO ADD A SPECIAL MEETING:
-               Copy a <tr>...</tr> block below, paste it at the TOP of this
-               list, and fill in the date, type, purpose, and minutes link.
-               For type, use: Special Meeting, Additional Meeting, Workshop,
-               Public Hearing, or whatever is appropriate.
-               ================================================================ -->
-
-          <!-- UPDATE: Replace these examples with your actual recent special meetings -->
-          <tr>
-            <td class="meeting-date">Tuesday, April 7, 2026<em style="font-size:12px;color:#888;"><br>Located at Williamson High School</em></td>
-            <td><span class="meeting-tag" style="background:#fff4e0;color:#7a5200;">Additional</span></td>
-            <td style="font-size:14px; color:#444;">Data Center Ordinance Public Hearing</td>
-            <td><span class="pending">Pending</span></td>
-          </tr>
-          <tr>
-            <td class="meeting-date">Wednesday, March 25, 2026</td>
-            <td><span class="meeting-tag" style="background:#fff4e0;color:#7a5200;">Additional</span></td>
-            <td style="font-size:14px; color:#444;">Planning Commission Meeting</td>
-            <td><span class="pending">Pending</span></td>
-          </tr>
-
-        </tbody>
-      </table>
-      <p style="font-size:13px; color:#888; margin-top:14px;">
-        Special meetings are posted in advance per Pennsylvania Sunshine Act requirements.
-        Contact the township office for information about upcoming special meetings.
-      </p>
+      <div id="special-meetings-container">
+        <p class="drive-loading">Loading special meeting records&hellip;</p>
+      </div>
     </div>
 
   </div>
 
   <!-- ====== FOOTER ====== -->
   <footer class="site-footer">
-    <div class="footer-inner">
-      <strong>Lawrence Township</strong> &bull;
-      1038 Buckwheat Hollow Rd, Lawrenceville, PA 16929<br>
-      Phone: <a href="tel:5708272254">(570) 827-2254</a> &bull;
-      Fax: (570) 827-0210 &bull;
-      <a href="mailto:twp@epix.net">twp@epix.net</a>
-    </div>
+    <div class="footer-inner" id="footer-contact"></div>
   </footer>
+
+  <script>
+    UI.renderFooter();
+    document.getElementById("meeting-location").textContent = CONFIG.meetingLocation;
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    // ── Regular meeting schedule for current year ───────────────────────────
+    // Build the full year table, then overlay Drive docs on past dates.
+    (async function buildSchedule() {
+      const tbody = document.getElementById("schedule-body");
+      const year  = today.getFullYear();
+      const dates = Schedule.getForYear(year);   // all 12 meeting dates
+
+      // Fetch agendas + minutes from Drive
+      let records = {};
+      try {
+        const { agendas, minutes } = await Drive.getMeetingFiles(CONFIG.driveFolders.monthlyMeetings);
+        Drive.buildMeetingRecords(agendas, minutes).forEach(r => {
+          records[r.info.dateKey] = r;
+        });
+      } catch (e) {
+        console.error("Could not load meeting documents:", e);
+      }
+
+      tbody.innerHTML = dates.map(date => {
+        const isPast    = date < today;
+        const key       = Schedule.toKey(date);
+        const record    = records[key] || null;
+        const isOverride = CONFIG.meetingDateOverrides[
+          Schedule.toKey(Schedule.getForYear(year)[dates.indexOf(date)])
+        ];
+
+        const dateLabel = Schedule.formatDate(date) +
+          (isOverride ? ' <em style="font-size:12px;color:#888;">(holiday shift)</em>' : "");
+
+        const agendaCell  = record ? UI.docLink(record.agenda)  : `<span class="pending">—</span>`;
+        const minutesCell = isPast
+          ? (record ? UI.docLink(record.minutes, "View") : `<span class="pending">Pending</span>`)
+          : `<span class="pending">Not yet held</span>`;
+
+        return `
+          <tr class="${isPast ? "" : ""}">
+            <td class="meeting-date">${dateLabel}</td>
+            <td>${CONFIG.meetingTime}</td>
+            <td>${agendaCell}</td>
+            <td>${minutesCell}</td>
+          </tr>`;
+      }).join("");
+    })();
+
+    // ── Special / Additional meetings from Drive ────────────────────────────
+    (async function buildSpecial() {
+      const container = document.getElementById("special-meetings-container");
+      try {
+        const { agendas, minutes } = await Drive.getMeetingFiles(CONFIG.driveFolders.specialMeetings);
+        const records = Drive.buildMeetingRecords(agendas, minutes);
+
+        if (records.length === 0) {
+          container.innerHTML = `<p class="drive-loading">No special meeting records on file.</p>`;
+          return;
+        }
+
+        container.innerHTML = `
+          <table class="meeting-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th style="width:100px;">Agenda</th>
+                <th style="width:100px;">Minutes</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${records.map(r => `
+                <tr>
+                  <td class="meeting-date">${r.info.displayDate}</td>
+                  <td style="font-size:14px; color:#444;">${r.info.title}</td>
+                  <td>${UI.docLink(r.agenda)}</td>
+                  <td>${r.info.date < today
+                      ? UI.docLink(r.minutes, "View")
+                      : `<span class="pending">Not yet held</span>`}
+                  </td>
+                </tr>`).join("")}
+            </tbody>
+          </table>
+          <p style="font-size:13px; color:#888; margin-top:14px;">
+            Contact the township office at ${CONFIG.phone} for information about upcoming special meetings.
+          </p>`;
+
+      } catch (err) {
+        UI.showError(container, "Special meeting records could not be loaded.");
+        console.error(err);
+      }
+    })();
+  </script>
 
 </body>
 </html>

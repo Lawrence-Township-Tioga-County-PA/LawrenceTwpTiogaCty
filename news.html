@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>News &amp; Announcements — Lawrence Township</title>
+  <title>Announcements — Lawrence Township</title>
   <meta name="description" content="News and announcements from Lawrence Township, Tioga County, Pennsylvania.">
   <link rel="stylesheet" href="style.css">
+  <script src="config.js"></script>
+  <script src="drive.js"></script>
 </head>
 <body>
 
@@ -18,8 +20,9 @@
       </a>
       <nav class="site-nav">
         <a href="index.html">Home</a>
-        <a href="news.html" class="active">News</a>
+        <a href="news.html" class="active">Announcements</a>
         <a href="meetings.html">Meetings</a>
+        <a href="ordinances.html">Ordinances</a>
         <a href="contact.html">Contact</a>
       </nav>
     </div>
@@ -28,101 +31,76 @@
   <!-- ====== PAGE HERO ====== -->
   <div class="page-hero">
     <div class="page-hero-inner">
-      <h1>News &amp; Announcements</h1>
+      <h1>Announcements</h1>
       <p>Official notices and updates from Lawrence Township</p>
     </div>
   </div>
 
   <!-- ====== MAIN CONTENT ====== -->
   <div class="content-full">
-
     <div class="section-label">Latest Updates</div>
-
-    <!-- ================================================================
-         HOW TO ADD A NEWS ITEM:
-         Copy one block below (from <div class="card"> to its </div>),
-         paste it at the TOP of the list, and update the date, title,
-         and body text. That's it.
-         ================================================================ -->
-
-    <!-- UPDATE: Replace placeholder items with real announcements -->
-
-    <div class="card">
-        <div class="news-item">
-          <div class="news-date">April 25, 2026</div>
-          <div class="news-title">Spring Clean Up Day — 8:00am - 2:00pm</div>
-          <div class="news-subtitle">Located at Lawrence Township Building</div>
-          <div class="news-body">
-            <strong>Open to Businesses & Household Residents Only<br></strong>
-            <strong>LIMIT 2 LOADS PER BUSINESS or HOUSEHOLD<br></strong>
-            Small items need to be bagged to improve operation<br><br>
-            <strong>Accepting:</strong>
-            <ul style="column-count: 1; margin-left: 250x; list-style-position: inside;">
-              <li>Batteries</li>
-              <li>Appliances</li>
-              <li>Furniture</li>
-              <li>Tires - <strong>Four tires per household, up to 22.5" NO LARGER</strong></li>
-            </ul><br>
-            <strong>Not Accepting:</strong>
-            <ul style="column-count: 2; margin-left: 250x; list-style-position: inside;">
-              <li>Electronics</li>
-              <li>TV's</li>
-              <li>Paint</li>
-              <li>Asbestos</li>
-              <li>Fuels or containers with Fuels</li>
-              <li>Oils or Liquids</li>
-              <li>Burn Barrels</li>
-              <li>Household Garbage</li>
-              <li>Brush</li>
-              <li>Building Materials</li>
-            </ul>
-          </div>
-        </div>
+    <div id="announcements-container">
+      <p class="drive-loading">Loading announcements&hellip;</p>
     </div>
-
-    <div class="card">
-      <div class="news-item">
-        <div class="news-date">April 7, 2026</div>
-        <div class="news-title">Data Center Ordinance Public Hearing — 6:00pm</div>
-        <div class="news-subtitle">Located at Williamson High School</div>
-        <div class="news-body">
-          Public hearing to discuss proposed data center ordinance and zoning.
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="news-item" style="padding-top:0;">
-        <div class="news-date">April 6, 2026</div>
-        <div class="news-title">April Board Meeting — Minutes Pending</div>
-        <div class="news-body">
-          The Board of Supervisors held its regular monthly meeting on Monday, April 6, 2026 at 6:30 PM
-          at the Township Building. Minutes will be posted to the
-          <a href="meetings.html">Meetings page</a> once formally approved at the May meeting.
-          For questions, contact the township office at <a href="mailto:twp@epix.net">twp@epix.net</a>
-          or (570) 827-2254.
-        </div>
-      </div>
-    </div>
-
-    <!-- Add older announcements above this line in the same card format -->
-
-    <p style="font-size:14px; color: #888; margin-top: 8px;">
-      For archived meeting minutes and agendas, visit the <a href="meetings.html">Meetings page</a>.
-    </p>
-
   </div>
 
   <!-- ====== FOOTER ====== -->
   <footer class="site-footer">
-    <div class="footer-inner">
-      <strong>Lawrence Township</strong> &bull;
-      1038 Buckwheat Hollow Rd, Lawrenceville, PA 16929<br>
-      Phone: <a href="tel:5708272254">(570) 827-2254</a> &bull;
-      Fax: (570) 827-0210 &bull;
-      <a href="mailto:twp@epix.net">twp@epix.net</a>
-    </div>
+    <div class="footer-inner" id="footer-contact"></div>
   </footer>
+
+  <script>
+    UI.renderFooter();
+
+    (async function () {
+      const container = document.getElementById("announcements-container");
+      try {
+        const files  = await Drive.getFilesRecursively(CONFIG.driveFolders.announcements);
+        const sorted = Drive.sortByDate(files);
+
+        if (sorted.length === 0) {
+          container.innerHTML = `<p class="drive-loading">No announcements at this time.</p>`;
+          return;
+        }
+
+        // Fetch content for each announcement in parallel
+        const items = await Promise.all(sorted.map(async file => {
+          const info = Drive.parseFilename(file.name);
+          if (!info) return null;
+
+          let bodyHtml = "";
+          try {
+            if (file.mimeType === "application/vnd.google-apps.document") {
+              bodyHtml = await Drive.getDocHtml(file.id);
+            }
+          } catch (e) {
+            bodyHtml = `<a href="${file.webViewLink}" target="_blank" rel="noopener">View announcement &rarr;</a>`;
+          }
+
+          return { info, file, bodyHtml };
+        }));
+
+        container.innerHTML = items
+          .filter(Boolean)
+          .map(({ info, file, bodyHtml }) => `
+            <div class="card" style="margin-bottom:16px;">
+              <div class="news-item" style="padding-top:0; border-bottom:none; padding-bottom:0;">
+                <div class="news-date">${info.displayDate}</div>
+                <div class="news-title">${info.title}</div>
+                ${bodyHtml
+                  ? `<div class="announcement-content">${bodyHtml}</div>`
+                  : `<div class="announcement-content"><a href="${file.webViewLink}" target="_blank" rel="noopener">View document &rarr;</a></div>`
+                }
+              </div>
+            </div>`)
+          .join("");
+
+      } catch (err) {
+        UI.showError(container, "Announcements could not be loaded. Please call the township office at " + CONFIG.phone + " or check back later.");
+        console.error(err);
+      }
+    })();
+  </script>
 
 </body>
 </html>

@@ -4,8 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact — Lawrence Township</title>
-  <meta name="description" content="Contact information for Lawrence Township, Tioga County, Pennsylvania — office, supervisors, police, and other departments.">
+  <meta name="description" content="Contact information for Lawrence Township, Tioga County, Pennsylvania.">
   <link rel="stylesheet" href="style.css">
+  <script src="config.js"></script>
+  <script src="drive.js"></script>
 </head>
 <body>
 
@@ -18,8 +20,9 @@
       </a>
       <nav class="site-nav">
         <a href="index.html">Home</a>
-        <a href="news.html">News</a>
+        <a href="news.html">Announcements</a>
         <a href="meetings.html">Meetings</a>
+        <a href="ordinances.html">Ordinances</a>
         <a href="contact.html" class="active">Contact</a>
       </nav>
     </div>
@@ -40,7 +43,7 @@
     <div class="emergency-box">
       <div>
         <div class="emerg-label">Emergency</div>
-        <div class="emerg-number" style="font-family: Arial, sans-serif;">Dial 911</div>
+        <div class="emerg-number">911 &nbsp;&nbsp;or&nbsp;&nbsp; (570) 724-7911</div>
       </div>
     </div>
 
@@ -83,7 +86,6 @@
           <div class="official-title">Secretary / Treasurer</div>
           <div class="official-name">Lisa Stage</div>
         </div>
-
         <!-- UPDATE: Verify all Board of Supervisors names and roles are current -->
         <div class="official-block">
           <div class="official-title">Board of Supervisors — Chairman</div>
@@ -122,13 +124,10 @@
     <div class="section-label">Lawrence Township Police Department</div>
     <div class="card" style="margin-bottom:28px;">
       <div class="contact-grid" style="margin-bottom:0;">
-
         <div>
           <div class="official-block" style="padding-top:0;">
             <div class="official-title">Location</div>
-            <div class="official-detail">
-              1038 Buckwheat Hollow Rd<br>Lawrenceville, PA 16929
-            </div>
+            <div class="official-detail">1038 Buckwheat Hollow Rd<br>Lawrenceville, PA 16929</div>
           </div>
           <div class="official-block">
             <div class="official-title">Non-Emergency Phone</div>
@@ -144,7 +143,6 @@
             </div>
           </div>
         </div>
-
         <div>
           <!-- UPDATE: Verify police officer names/roles are current -->
           <div class="official-block" style="padding-top:0;">
@@ -160,7 +158,6 @@
             <div class="official-name">Kyle Mack</div>
           </div>
         </div>
-
       </div>
     </div>
 
@@ -230,52 +227,43 @@
       </div>
     </div>
 
-    <!-- Other Officials / Departments -->
+    <!-- Other Officials -->
     <div class="section-label">Other Officials &amp; Departments</div>
     <div class="card">
       <div class="contact-grid" style="margin-bottom:0;">
-
         <div>
-          <!-- UPDATE: Verify tax collector info — the current site just says "Tioga County" -->
+          <!-- UPDATE: Verify tax collector info -->
           <div class="official-block" style="padding-top:0;">
             <div class="official-title">Tax Collector</div>
             <div class="official-name">Tioga County</div>
             <div class="official-detail">Contact Tioga County for property tax inquiries.</div>
           </div>
-
-          <!-- UPDATE: Verify Building Inspector info is current -->
+          <!-- UPDATE: Verify Building Inspector info -->
           <div class="official-block">
             <div class="official-title">Building Inspector</div>
             <div class="official-name">Erb Building Inspections</div>
             <div class="official-detail">
-              174 Water Tower Rd, Suite 1<br>
-              Lawrenceville, PA 16929<br>
+              174 Water Tower Rd, Suite 1<br>Lawrenceville, PA 16929<br>
               <a href="tel:5708273474">(570) 827-3474</a>
             </div>
           </div>
         </div>
-
         <div>
           <!-- UPDATE: Verify SEO contact -->
           <div class="official-block" style="padding-top:0;">
             <div class="official-title">Sewer Enforcement Officer</div>
             <div class="official-name">Terry Meyer</div>
-            <div class="official-detail">
-              <a href="tel:8142580301">(814) 258-0301</a>
-            </div>
+            <div class="official-detail"><a href="tel:8142580301">(814) 258-0301</a></div>
           </div>
-
           <!-- UPDATE: Verify Municipal Authority info -->
           <div class="official-block">
             <div class="official-title">Lawrence Township Municipal Authority</div>
             <div class="official-detail">
-              173 School Road<br>
-              Tioga, PA 16946<br>
+              173 School Road<br>Tioga, PA 16946<br>
               <a href="tel:5708270970">(570) 827-0970</a>
             </div>
           </div>
         </div>
-
       </div>
     </div>
 
@@ -283,14 +271,12 @@
 
   <!-- ====== FOOTER ====== -->
   <footer class="site-footer">
-    <div class="footer-inner">
-      <strong>Lawrence Township</strong> &bull;
-      1038 Buckwheat Hollow Rd, Lawrenceville, PA 16929<br>
-      Phone: <a href="tel:5708272254">(570) 827-2254</a> &bull;
-      Fax: (570) 827-0210 &bull;
-      <a href="mailto:twp@epix.net">twp@epix.net</a>
-    </div>
+    <div class="footer-inner" id="footer-contact"></div>
   </footer>
+
+  <script>
+    UI.renderFooter();
+  </script>
 
 </body>
 </html>
