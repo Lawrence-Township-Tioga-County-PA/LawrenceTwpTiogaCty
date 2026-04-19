@@ -117,4 +117,4 @@ Note: Google Drive API calls will fail locally if the API key has website restri
 
 ---
 
-*Built and maintained by Matt — Lawrence Township Board of Supervisors*
+*Codebase built and maintained by Matt Strevig (msdesigns1212)*
