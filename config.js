@@ -50,7 +50,7 @@ const CONFIG = {
   // ── Google API ───────────────────────────────────────────────────────────────
   // Replace with your API key. Restrict it to your Netlify domains in
   // Google Cloud Console → APIs & Services → Credentials.
-  googleApiKey: "YOUR_API_KEY_HERE",
+  googleApiKey: "AIzaSyBX3uHhALYWHnCzjQ1LbDOj7E_D1vdIRMc",
 
   // Google Drive folder IDs.
   // Get these from the folder URL:
