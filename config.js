@@ -50,7 +50,7 @@ const CONFIG = {
   // ── Google API ───────────────────────────────────────────────────────────────
   // Replace with your API key. Restrict it to your Netlify domains in
   // Google Cloud Console → APIs & Services → Credentials.
-  googleApiKey: "AIzaSyBX3uHhALYWHnCzjQ1LbDOj7E_D1vdIRMc",
+  googleApiKey: "YOUR_API_KEY_HERE",
 
   // Google Drive folder IDs.
   // Get these from the folder URL:
@@ -60,6 +60,17 @@ const CONFIG = {
     monthlyMeetings: "1-wSf9QvwOYv5cYQIkr7FGgdubhb5ias-",
     specialMeetings: "1lui4uJ7zUuV7P3GNTp3k0MfEE2AcGbvy",
     ordinances:      "1QIJS3N0TkKCqAlUXAYFr_p2Vlm5nyz5e",
+  },
+
+  // ── Domain Transition ────────────────────────────────────────────────────────
+  // Configure when migrating from .com to .gov.
+  // The banner only displays when the site is accessed via comDomain.
+  // Set enabled to false once the .com is fully released.
+  domainTransition: {
+    enabled:     false,                                   // set true when .gov is live
+    comDomain:   "lawrencetownshiptiogacountypa.com",
+    govDomain:   "lawrencetownship-tioga.gov",            // UPDATE when .gov is assigned
+    cutoverDate: "January 1, 2027",                       // UPDATE when timeline is confirmed
   },
 
 };

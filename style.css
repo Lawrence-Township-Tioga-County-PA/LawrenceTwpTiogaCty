@@ -482,6 +482,50 @@ img { max-width: 100%; display: block; }
 .mb-20 { margin-bottom: 20px; }
 
 /* ============================================================
+   DOMAIN TRANSITION BANNER
+   Shown only when visiting from the old .com address.
+   ============================================================ */
+
+.domain-banner {
+  background: #5a3e00;
+  border-bottom: 2px solid var(--gold);
+}
+
+.domain-banner-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 14px;
+  color: #f5e9c8;
+  line-height: 1.5;
+}
+
+.domain-banner-link {
+  color: #f5e9c8;
+  font-weight: 600;
+  text-decoration: underline;
+}
+.domain-banner-link:hover { color: #fff; }
+
+.domain-banner-close {
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #f5e9c8;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 3px 9px;
+  border-radius: var(--radius);
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+.domain-banner-close:hover { background: rgba(255, 255, 255, 0.12); }
+
+/* ============================================================
    DRIVE DYNAMIC CONTENT STATES
    ============================================================ */
 
