@@ -482,6 +482,63 @@ img { max-width: 100%; display: block; }
 .mb-20 { margin-bottom: 20px; }
 
 /* ============================================================
+   DRIVE DYNAMIC CONTENT STATES
+   ============================================================ */
+
+.drive-loading {
+  font-size: 14px;
+  color: var(--text-muted);
+  padding: 24px 0;
+  font-style: italic;
+}
+
+.drive-error {
+  font-size: 14px;
+  color: #a32d2d;
+  padding: 12px 16px;
+  background: #fff4f4;
+  border: 1px solid #f0c0c0;
+  border-radius: var(--radius);
+}
+
+/* Rendered Google Doc content inside announcements */
+.announcement-content {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-top: 6px;
+}
+.announcement-content p { margin: 0 0 8px; }
+.announcement-content p:last-child { margin-bottom: 0; }
+.announcement-content ul,
+.announcement-content ol { padding-left: 20px; margin: 0 0 8px; }
+.announcement-content li { margin-bottom: 3px; }
+.announcement-content b,
+.announcement-content strong { color: var(--text-dark); font-weight: 600; }
+.announcement-content a { color: var(--green-light); }
+
+/* ============================================================
+   ORDINANCES PAGE
+   ============================================================ */
+
+.ordinance-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #ece8de;
+  gap: 16px;
+}
+.ordinance-item:last-child { border-bottom: none; }
+.ordinance-item:first-child { padding-top: 0; }
+
+.ordinance-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--green-dark);
+}
+
+/* ============================================================
    RESPONSIVE — Tablets & Mobile
    ============================================================ */
 
