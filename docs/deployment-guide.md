@@ -214,6 +214,81 @@ Before handing off to the township:
 
 ---
 
+## Domain Transition — .com to .gov
+
+Pennsylvania municipalities are eligible for a free `.gov` domain through the federal DotGov
+program. This is strongly recommended over a `.com` — it carries more credibility, costs nothing,
+and is permanently tied to the government entity rather than an individual or vendor.
+
+### Getting the .gov
+
+1. Apply at **get.gov**
+2. The application must be signed by an **authorizing official** — a government role such as
+   the Board Chairman. You cannot sign it yourself as a contractor.
+3. Processing takes approximately **2–4 weeks**
+4. You will need to demonstrate the township is a legitimate government entity
+   (incorporation documents, letterhead, etc.)
+5. The domain itself is **free** — no annual registration fee
+
+Submit the application as early as possible since it has the longest lead time in the process.
+
+### Suggested Transition Timeline
+
+```
+Week 0    — Submit .gov application
+Week 2-4  — .gov approved, configured in Netlify as production domain
+Week 4    — New site launches on .gov
+            .com immediately redirects to .gov (Netlify redirect rule)
+            Domain transition banner enabled in config.js
+            Announcement posted: "We have a new address — [.gov]"
+
+Week 16   — Second announcement: "Old address retires in 30 days"
+Week 20   — Third announcement: "Old address retired today"
+            .com redirect removed
+            Domain released / not renewed
+            Banner disabled in config.js
+```
+
+90 days of redirect gives residents, county directories, and any sites linking to the `.com`
+enough time to update before the domain is released.
+
+### Before Releasing the .com
+
+Check every place the old domain appears and update it:
+- Tioga County website
+- PA Township Association directory
+- Google Business Profile (if one exists)
+- Any local Facebook groups or community pages
+- Township letterhead, signage, and printed materials
+
+### Enabling the Banner
+
+When the `.gov` is live and the `.com` redirect is in place, update `config.js`:
+
+```javascript
+domainTransition: {
+  enabled:     true,                         // flip this to true
+  comDomain:   "lawrencetownshiptiogacountypa.com",
+  govDomain:   "lawrencetownship-tioga.gov", // your assigned .gov
+  cutoverDate: "January 1, 2027",            // your confirmed cutover date
+},
+```
+
+The banner will appear automatically on every page when a visitor arrives via the `.com` address.
+It is dismissible once per browser session and does not appear on the `.gov` site at all.
+When the `.com` is released, set `enabled: false` and redeploy.
+
+### Setting Up the .com Redirect in Netlify
+
+In the Netlify dashboard for the production site:
+1. Go to **Site configuration → Redirects**
+2. Add a redirect rule: `/* https://[your.gov]/:splat 301`
+
+This sends every `.com` URL to the matching `.gov` URL — so bookmarks to specific pages
+still work during the transition period.
+
+---
+
 ## Optional — Google Workspace Email
 
 If the township wants a professional email address on their domain (e.g. `office@[domain].com`):

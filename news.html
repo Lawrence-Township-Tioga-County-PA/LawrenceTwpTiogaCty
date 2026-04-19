@@ -51,6 +51,7 @@
 
   <script>
     UI.renderFooter();
+    UI.renderBanner();
 
     (async function () {
       const container = document.getElementById("announcements-container");
@@ -72,6 +73,8 @@
           try {
             if (file.mimeType === "application/vnd.google-apps.document") {
               bodyHtml = await Drive.getDocHtml(file.id);
+            } else if (file.mimeType === "application/pdf") {
+              bodyHtml = `<a href="${file.webViewLink}" target="_blank" rel="noopener" class="pdf-link">View PDF &rarr;</a>`;
             }
           } catch (e) {
             bodyHtml = `<a href="${file.webViewLink}" target="_blank" rel="noopener">View announcement &rarr;</a>`;
