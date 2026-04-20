@@ -116,6 +116,7 @@
       .map(h => `<span class="hours-day">${h.day}</span><span class="hours-time">${h.hours}</span>`)
       .join("");
     UI.renderFooter();
+    UI.renderBanner();
 
     // ── Upcoming meetings from schedule ───────────────────────────────────────
     document.getElementById("upcoming-meetings").innerHTML =
@@ -147,6 +148,8 @@
           try {
             if (file.mimeType === "application/vnd.google-apps.document") {
               contentHtml = await Drive.getDocHtml(file.id);
+            } else if (file.mimeType === "application/pdf") {
+              contentHtml = `<a href="${file.webViewLink}" target="_blank" rel="noopener" class="pdf-link">View PDF &rarr;</a>`;
             }
           } catch (e) {
             contentHtml = `<a href="${file.webViewLink}" target="_blank" rel="noopener">View announcement &rarr;</a>`;

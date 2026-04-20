@@ -3,7 +3,7 @@
 
 Official website for Lawrence Township, Tioga County, PA. Built as a static site with Google Drive as the content management backend — no database, no CMS login, no code changes required for day-to-day content updates.
 
-**Live site:** https://lawrencetownshiptiogacountypa.com
+**Live site:** https://lawrencetownshiptiogacountypa.com  
 **Test environment:** https://lawrencetownshiptiogacountypa-test.netlify.app
 
 ---

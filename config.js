@@ -62,4 +62,16 @@ const CONFIG = {
     ordinances:      "1QIJS3N0TkKCqAlUXAYFr_p2Vlm5nyz5e",
   },
 
+  // ── Domain Transition ────────────────────────────────────────────────────────
+  // Configure when migrating from .com to .gov.
+  // The banner only displays when the site is accessed via comDomain.
+  // Set enabled to false once the .com is fully released.
+  domainTransition: {
+    enabled:     false,                                   // set true when .gov is live
+    testMode:    false,                                   // set true to preview banner on any domain
+    comDomain:   "lawrencetownshiptiogacountypa.com",
+    govDomain:   "lawrencetownship-tioga.gov",            // UPDATE when .gov is assigned
+    cutoverDate: "January 1, 2027",                       // UPDATE when timeline is confirmed
+  },
+
 };

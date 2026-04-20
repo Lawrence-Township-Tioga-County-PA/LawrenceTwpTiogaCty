@@ -301,4 +301,32 @@ const UI = {
       `Fax: ${CONFIG.fax} &bull; <a href="mailto:${CONFIG.email}">${CONFIG.email}</a>`;
   },
 
+  // Render a domain transition banner when visiting from the old .com address.
+  // Only displays if domainTransition.enabled is true in config and the visitor
+  // is on the .com domain. Dismissible once per browser session.
+  renderBanner() {
+    const t = CONFIG.domainTransition;
+    if (!t || !t.enabled) return;
+    if (!t.testMode && window.location.hostname !== t.comDomain) return;
+    if (sessionStorage.getItem("lt-banner-dismissed")) return;
+
+    const banner = document.createElement("div");
+    banner.className = "domain-banner";
+    banner.innerHTML = `
+      <div class="domain-banner-inner">
+        <span>
+          Our website has a new address:
+          <a href="https://${t.govDomain}" class="domain-banner-link">${t.govDomain}</a>
+          &mdash; please update your bookmarks.
+          This address will stop working after <strong>${t.cutoverDate}</strong>.
+        </span>
+        <button class="domain-banner-close" aria-label="Dismiss"
+          onclick="this.closest('.domain-banner').remove();
+                   sessionStorage.setItem('lt-banner-dismissed','1')">
+          &times;
+        </button>
+      </div>`;
+    document.body.insertBefore(banner, document.body.firstChild);
+  },
+
 };
