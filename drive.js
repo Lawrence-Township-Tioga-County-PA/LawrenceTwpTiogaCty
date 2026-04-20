@@ -307,7 +307,7 @@ const UI = {
   renderBanner() {
     const t = CONFIG.domainTransition;
     if (!t || !t.enabled) return;
-    if (window.location.hostname !== t.comDomain) return;
+    if (!t.testMode && window.location.hostname !== t.comDomain) return;
     if (sessionStorage.getItem("lt-banner-dismissed")) return;
 
     const banner = document.createElement("div");
